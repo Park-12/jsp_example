@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/usr/article/write")
-public class UsrArticleWriteServlet extends HttpServlet {
+@WebServlet("/usr/article/doWrite")
+public class UsrArticleDoWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -19,8 +19,11 @@ public class UsrArticleWriteServlet extends HttpServlet {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/usr/article/write.jsp");
-		requestDispatcher.forward(request, response);
+		String title = request.getParameter("title");
+		String body = request.getParameter("body");
+		
+		response.getWriter().append(title + "<br>");
+		response.getWriter().append(body + "<br>");
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
