@@ -1,4 +1,4 @@
-package com.shp.mysqlutil;
+package com.sbs.mysqlutil;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
