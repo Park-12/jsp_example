@@ -10,14 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.exam.exam1.util.Util;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@ToString
 public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
+	@Getter
 	private boolean isInvalid = false;
+	@Getter
 	private String actionMethodName;
+	@Getter
 	private String controllerName;
+	@Getter
 	private String controllerTypeName;
-	
 
 	public Rq(HttpServletRequest req, HttpServletResponse resp) {
 		try {
@@ -30,7 +37,7 @@ public class Rq {
 		resp.setCharacterEncoding("UTF-8");
 
 		resp.setContentType("text/html; charset=UTF-8");
-		
+
 		this.req = req;
 		this.resp = resp;
 
@@ -41,42 +48,18 @@ public class Rq {
 		int minBitsCount = 5;
 
 		if (requestUriBits.length < minBitsCount) {
-			isInvalid  = true;
+			isInvalid = true;
 			return;
 		}
-		
+
 		int controllerTypeNameIndex = 2;
 		int controllerNameIndex = 3;
 		int actionMethodNameIndex = 4;
-		
+
 		this.controllerTypeName = requestUriBits[controllerTypeNameIndex];
 		this.controllerName = requestUriBits[controllerNameIndex];
 		this.actionMethodName = requestUriBits[actionMethodNameIndex];
 
-	}
-
-	public HttpServletRequest getReq() {
-		return req;
-	}
-
-	public HttpServletResponse getResp() {
-		return resp;
-	}
-
-	public boolean isInvalid() {
-		return isInvalid;
-	}
-
-	public String getActionMethodName() {
-		return actionMethodName;
-	}
-
-	public String getControllerName() {
-		return controllerName;
-	}
-
-	public String getControllerTypeName() {
-		return controllerTypeName;
 	}
 
 	public void print(String str) {
@@ -103,17 +86,17 @@ public class Rq {
 
 	public String getParam(String paramName, String defaultValue) {
 		String paramValue = req.getParameter(paramName);
-		
-		if ( paramValue == null) {
+
+		if (paramValue == null) {
 			return defaultValue;
 		}
-		
+
 		return paramValue;
 	}
 
-	public void printf(String format, Object...args) {
+	public void printf(String format, Object... args) {
 		print(Util.f(format, args));
-		
+
 	}
 
 	public void historyBack(String msg) {

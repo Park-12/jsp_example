@@ -4,25 +4,20 @@ import java.util.Map;
 
 import com.sbs.exam.exam1.util.Util;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@ToString
 public class ResultData {
+	@Getter
 	private String msg;
+	@Getter
 	private String resultCode;
+	@Getter
 	private Map<String, Object> body ;
 	
 	private ResultData() {
 		
-	}
-
-	public String getMsg() {
-		return msg;
-	}
-
-	public String getResultCode() {
-		return resultCode;
-	}
-
-	public Map<String, Object> getBody() {
-		return body;
 	}
 	
 	public boolean isSuccess() {
