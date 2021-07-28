@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.exam.exam1.http.Rq;
+import com.sbs.exam.exam1.http.controller.Controller;
+import com.sbs.exam.exam1.http.controller.UsrArticleController;
 import com.sbs.mysqlutil.MysqlUtil;
 
 @WebServlet("/usr/*")
@@ -19,16 +21,27 @@ public class DispatcherServlet extends HttpServlet {
 		if (rq.isInvalid()) {
 			rq.print("올바른 요청이 아닙니다.");
 		}
-		rq.println("controllerTypeName : " + rq.getControllerTypeName());
-		rq.println("<br>");
-		rq.println("controllerName : " + rq.getControllerName());
-		rq.println("<br>");
-		rq.println("actionMethodName : " + rq.getActionMethodName());
+		
+		Controller controller = null;
+		
+		switch (rq.getControllerTypeName()) {
+		case "usr":
+			switch (rq.getControllerName()) {
+			case "article":
+				controller = new UsrArticleController();
+				break;
+			}
+			break;
+		}
+		
+		if (controller != null) {
+			MysqlUtil.setDBInfo("localhost", "sbsst", "sbs123414", "jsp_example");
+			MysqlUtil.setDevMode(true);
+			
+			controller.performAction(rq);
 
-		MysqlUtil.setDBInfo("localhost", "sbsst", "sbs123414", "jsp_example");
-		MysqlUtil.setDevMode(true);
-
-		MysqlUtil.closeConnection();
+			MysqlUtil.closeConnection();
+		}
 		
 	}
 
