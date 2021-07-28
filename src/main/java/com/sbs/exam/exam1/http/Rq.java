@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.exam.exam1.util.Util;
+
 public class Rq {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
@@ -110,7 +112,14 @@ public class Rq {
 	}
 
 	public void printf(String format, Object...args) {
-		print(String.format(format, args));
+		print(Util.f(format, args));
 		
+	}
+
+	public void historyBack(String msg) {
+		println("<script>");
+		printf("alert('%s');\n", msg);
+		println("history.back();");
+		println("</script>");
 	}
 }
