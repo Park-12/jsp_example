@@ -1,4 +1,4 @@
-package com.sbs.exam.exam1.http.dto;
+package com.sbs.exam.exam1.dto;
 
 import java.util.Map;
 

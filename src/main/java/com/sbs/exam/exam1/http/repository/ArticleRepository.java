@@ -6,7 +6,7 @@ import com.sbs.exam.exam1.dto.Article;
 import com.sbs.mysqlutil.MysqlUtil;
 import com.sbs.mysqlutil.SecSql;
 
-public class ArticleRepostiory {
+public class ArticleRepository {
 
 	public int write(String title, String body) {
 		SecSql sql = new SecSql();

@@ -3,26 +3,26 @@ package com.sbs.exam.exam1.http.controller;
 import java.util.List;
 
 import com.sbs.exam.exam1.dto.Article;
+import com.sbs.exam.exam1.dto.ResultData;
 import com.sbs.exam.exam1.http.Rq;
-import com.sbs.exam.exam1.http.dto.ResultData;
+import com.sbs.exam.exam1.http.container.Container;
 import com.sbs.exam.exam1.http.service.ArticleService;
 
 public class UsrArticleController extends Controller {
-	private ArticleService articleService;
+	private ArticleService articleService = Container.articleService;
 	
-	public UsrArticleController() {
-		articleService = new ArticleService();
-	}
-
 	@Override
 	public void performAction(Rq rq) {
 		switch (rq.getActionMethodName()) {
 		case "write":
 			actionShowWrite(rq);
+			break;
 		case "doWrite":
 			actionDoWrite(rq);
+			break;
 		case "list":
 			actionShowList(rq);
+			break;
 		}
 	}
 
