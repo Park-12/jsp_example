@@ -1,4 +1,4 @@
-package com.sbs.exam.exam1.http.service;
+package com.sbs.exam.exam1.service;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

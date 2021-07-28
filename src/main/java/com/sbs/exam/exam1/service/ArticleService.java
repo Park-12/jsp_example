@@ -1,11 +1,11 @@
-package com.sbs.exam.exam1.http.service;
+package com.sbs.exam.exam1.service;
 
 import java.util.List;
 
 import com.sbs.exam.exam1.dto.Article;
 import com.sbs.exam.exam1.dto.ResultData;
 import com.sbs.exam.exam1.http.container.Container;
-import com.sbs.exam.exam1.http.repository.ArticleRepository;
+import com.sbs.exam.exam1.repository.ArticleRepository;
 import com.sbs.exam.exam1.util.Util;
 
 public class ArticleService {

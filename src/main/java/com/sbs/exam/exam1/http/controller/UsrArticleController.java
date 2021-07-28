@@ -6,7 +6,7 @@ import com.sbs.exam.exam1.dto.Article;
 import com.sbs.exam.exam1.dto.ResultData;
 import com.sbs.exam.exam1.http.Rq;
 import com.sbs.exam.exam1.http.container.Container;
-import com.sbs.exam.exam1.http.service.ArticleService;
+import com.sbs.exam.exam1.service.ArticleService;
 
 public class UsrArticleController extends Controller {
 	private ArticleService articleService = Container.articleService;
@@ -23,6 +23,9 @@ public class UsrArticleController extends Controller {
 		case "list":
 			actionShowList(rq);
 			break;
+		default:
+			rq.println("존재하지 않는 페이지 입니다.");
+			break;
 		}
 	}
 
@@ -37,6 +40,7 @@ public class UsrArticleController extends Controller {
 	private void actionDoWrite(Rq rq) {
 		String title = rq.getParam("title", "");
 		String body = rq.getParam("body", "");
+		String redirectUri = rq.getParam("redirectUri", "../article/list");
 		
 		if (title.length() == 0) {
 			rq.historyBack("title을 입력해주세요.");
@@ -49,8 +53,11 @@ public class UsrArticleController extends Controller {
 		}
 		
 		ResultData writeRd = articleService.write(title, body);
+		int id = (int) writeRd.getBody().get("id");
 		
-		rq.printf(writeRd.getMsg());
+		redirectUri = redirectUri.replace("[NEW_ID]", id + "");
+		
+		rq.replace(writeRd.getMsg(), redirectUri);
 	}
 
 	private void actionShowWrite(Rq rq) {
