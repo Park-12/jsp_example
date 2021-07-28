@@ -1,5 +1,8 @@
 package com.sbs.exam.exam1.http.service;
 
+import java.util.List;
+
+import com.sbs.exam.exam1.dto.Article;
 import com.sbs.exam.exam1.http.dto.ResultData;
 import com.sbs.exam.exam1.http.repository.ArticleRepostiory;
 import com.sbs.exam.exam1.util.Util;
@@ -15,6 +18,10 @@ public class ArticleService {
 		int id = articleRepostiory.write(title, body);
 		
 		return ResultData.from("S-1", Util.f("%d번 게시물이 생성되었습니다.", id), "id", id);
+	}
+
+	public List<Article> getForPrintArticles() {
+		return articleRepostiory.getForPrintArticles();
 	}
 
 }

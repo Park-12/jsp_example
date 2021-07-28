@@ -1,5 +1,8 @@
 package com.sbs.exam.exam1.http.controller;
 
+import java.util.List;
+
+import com.sbs.exam.exam1.dto.Article;
 import com.sbs.exam.exam1.http.Rq;
 import com.sbs.exam.exam1.http.dto.ResultData;
 import com.sbs.exam.exam1.http.service.ArticleService;
@@ -24,8 +27,11 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void actionShowList(Rq rq) {
-		// TODO Auto-generated method stub
+		List<Article> articles = articleService.getForPrintArticles();
 		
+		rq.setAttr("articles", articles);
+		
+		rq.jsp("usr/article/list");
 	}
 
 	private void actionDoWrite(Rq rq) {

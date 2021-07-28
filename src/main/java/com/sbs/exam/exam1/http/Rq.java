@@ -2,12 +2,14 @@ package com.sbs.exam.exam1.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.exam.exam1.dto.Article;
 import com.sbs.exam.exam1.util.Util;
 
 import lombok.Getter;
@@ -104,5 +106,13 @@ public class Rq {
 		printf("alert('%s');\n", msg);
 		println("history.back();");
 		println("</script>");
+	}
+
+	public void println(Object obj) {
+		println(obj.toString());
+	}
+
+	public void setAttr(String attrName, Object attrValue) {
+		req.setAttribute(attrName, attrValue);
 	}
 }
