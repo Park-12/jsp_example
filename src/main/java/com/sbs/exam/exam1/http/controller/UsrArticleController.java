@@ -30,10 +30,57 @@ public class UsrArticleController extends Controller {
 		case "doDelete":
 			actionDoDelete(rq);
 			break;
+		case "modify":
+			actionShowModify(rq);
+			break;
+		case "doModify":
+			actionDoModify(rq);
+			break;
 		default:
 			rq.println("존재하지 않는 페이지 입니다.");
 			break;
 		}
+	}
+
+	private void actionDoModify(Rq rq) {
+		int id = rq.getIntParam("id", 0);
+		String title = rq.getParam("title", "");
+		String body = rq.getParam("body", "");
+		String redirectUri = rq.getParam("redirectUri", "../article/detail");
+
+		if (title.length() == 0) {
+			rq.historyBack("title을 입력해주세요.");
+			return;
+		}
+
+		if (body.length() == 0) {
+			rq.historyBack("body를 입력해주세요.");
+			return;
+		}
+
+		ResultData modifyRd = articleService.modify(id, title, body);
+		
+		rq.replace(modifyRd.getMsg(), redirectUri);
+	}
+
+	private void actionShowModify(Rq rq) {
+		int id = rq.getIntParam("id", 0);
+
+		if (id == 0) {
+			rq.historyBack("id을 입력해주세요.");
+			return;
+		}
+
+		Article article = articleService.getForPrintArticleById(id);
+		
+		if (article == null) {
+			rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+			return;
+		}
+
+		rq.setAttr("article", article);
+
+		rq.jsp("usr/article/modify");
 	}
 
 	private void actionDoDelete(Rq rq) {
