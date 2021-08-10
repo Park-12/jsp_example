@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- 데이지 UI 불러오기 -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@0.20.0/dist/full.css"
+<link
+	href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1/dist/tailwind.min.css"
+	rel="stylesheet" type="text/css" />
+<link href="https://cdn.jsdelivr.net/npm/daisyui@1.4.0/dist/full.css"
 	rel="stylesheet" type="text/css" />
 
 <!-- 폰트어썸 불러오기 -->
@@ -22,3 +25,66 @@
 	href="${pageContext.request.contextPath}/resource/common.css" />
 </head>
 <body>
+
+	<header class="top-bar h-20 font-bold">
+		<div class="h-full container mx-auto flex">
+			<a href="/" class="top-bar__logo flex items-center px-4 hover:underline hover:text-red-500">
+				<span>
+					<i class="far fa-lemon"></i>
+				</span>
+				&nbsp;
+				<span> 레몬 커뮤니티 </span>
+			</a>
+			
+			<div class="flex-grow"></div>
+
+			<nav class="top-bar__menu-box-1">
+				<ul class="flex h-full">
+					<li>
+						<a href="#" class="h-full flex items-center px-4 hover:underline hover:text-red-500">
+							<span>
+								<i class="fas fa-home"></i>
+							</span>
+							&nbsp;
+							<span>HOME</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="h-full flex items-center px-4 hover:underline hover:text-red-500">
+							<span>
+								<i class="fas fa-flag"></i>
+							</span>
+							&nbsp;
+							<span>NOTICE LIST</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="h-full flex items-center px-4 hover:underline hover:text-red-500">
+							<span>
+								<i class="fab fa-free-code-camp"></i>
+							</span>
+							&nbsp;
+							<span>FREE LIST</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="h-full flex items-center px-4 hover:underline hover:text-red-500">
+							<span>
+								<i class="fas fa-sign-in-alt"></i>
+							</span>
+							&nbsp;
+							<span>LOGIN</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="h-full flex items-center px-4 hover:underline hover:text-red-500">
+							<span>
+								<i class="fas fa-user-plus"></i>
+							</span>
+							<span>JOIN</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
