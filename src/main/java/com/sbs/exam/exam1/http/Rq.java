@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.exam.exam1.dto.Article;
-import com.sbs.exam.exam1.util.Util;
+import com.sbs.exam.exam1.util.Ut;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -112,7 +112,7 @@ public class Rq {
 	}
 
 	public void printf(String format, Object... args) {
-		print(Util.f(format, args));
+		print(Ut.f(format, args));
 
 	}
 

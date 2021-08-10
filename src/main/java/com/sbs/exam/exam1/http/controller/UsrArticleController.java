@@ -7,6 +7,7 @@ import com.sbs.exam.exam1.dto.ResultData;
 import com.sbs.exam.exam1.http.Rq;
 import com.sbs.exam.exam1.http.container.Container;
 import com.sbs.exam.exam1.service.ArticleService;
+import com.sbs.exam.exam1.util.Ut;
 
 public class UsrArticleController extends Controller {
 	private ArticleService articleService = Container.articleService;
@@ -26,10 +27,35 @@ public class UsrArticleController extends Controller {
 		case "detail":
 			actionShowDetail(rq);
 			break;
+		case "doDelete":
+			actionDoDelete(rq);
+			break;
 		default:
 			rq.println("존재하지 않는 페이지 입니다.");
 			break;
 		}
+	}
+
+	private void actionDoDelete(Rq rq) {
+		int id = rq.getIntParam("id", 0);
+		String redirectUri = rq.getParam("redirectUri", "../article/list");
+
+		if (id == 0) {
+			rq.historyBack("id을 입력해주세요.");
+			return;
+		}
+
+		Article article = articleService.getForPrintArticleById(id);
+		
+		if (article == null) {
+			rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+			return;
+		}
+		
+		articleService.delete(id);
+		
+		rq.replace(Ut.f("%d번 게시물을 삭제하였습니다.", id), redirectUri);
+
 	}
 
 	private void actionShowDetail(Rq rq) {
@@ -41,6 +67,11 @@ public class UsrArticleController extends Controller {
 		}
 
 		Article article = articleService.getForPrintArticleById(id);
+		
+		if (article == null) {
+			rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
+			return;
+		}
 
 		rq.setAttr("article", article);
 

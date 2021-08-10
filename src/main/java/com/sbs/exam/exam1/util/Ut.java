@@ -3,7 +3,7 @@ package com.sbs.exam.exam1.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Util {
+public class Ut {
 
 	public static String f(String string, Object... args) {
 		return String.format(string, args);

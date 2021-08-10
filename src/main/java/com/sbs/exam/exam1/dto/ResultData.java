@@ -2,7 +2,7 @@ package com.sbs.exam.exam1.dto;
 
 import java.util.Map;
 
-import com.sbs.exam.exam1.util.Util;
+import com.sbs.exam.exam1.util.Ut;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -33,7 +33,7 @@ public class ResultData {
 		
 		rd.resultCode = resultCode;
 		rd.msg = msg;
-		rd.body = Util.mapOf(bodyArgs);
+		rd.body = Ut.mapOf(bodyArgs);
 		
 		return rd;
 	}
