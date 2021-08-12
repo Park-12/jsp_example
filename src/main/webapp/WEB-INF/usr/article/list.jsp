@@ -5,7 +5,7 @@
 <c:set var="pageTitle" value="게시물 리스트" />
 <%@ include file="../part/head.jspf"%>
 
-<section class="section section-article-write px-4">
+<section class="section section-article-list px-4">
 	<div class="container mx-auto">
 
 		<div class="card bordered shadow-lg">

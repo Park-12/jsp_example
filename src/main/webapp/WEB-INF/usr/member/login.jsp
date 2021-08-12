@@ -2,26 +2,22 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="게시물 수정" />
+<c:set var="pageTitle" value="로그인"/>
 <%@ include file="../part/head.jspf"%>
 
-<section class="section section-article-modify px-4">
+<section class="section section-member-login px-4">
 	<div class="container mx-auto">
 		<div class="card bordered shadow-lg">
 			<div class="card-title">
 				<a href="javascript:history.back();" class="cursor-pointer">
 					<i class="fas fa-chevron-left"></i>
 				</a>
-				<span>게시물 수정</span>
+				<span>로그인</span>
 			</div>
 			<div class="px-4 py-4">
 				<script>
-					let ArticleModify__submitDone = false;
-					function ArticleModify__submit(form) {
-						if (ArticleModify__submitDone) {
-							return;
-						}
-						
+					let MemberLogin__submitDone = false;
+					function MemberLogin__submit(form) {
 						if (form.title.value.length == 0) {
 							alert('제목을 입력해주세요.');
 							form.title.focus();
@@ -35,36 +31,36 @@
 
 							return;
 						}
+						
 						form.submit();
-						ArticleModify__submitDone = true;
+						MemberLogin__submitDone = true;
 					}
 				</script>
-				<form action="../article/doModify" method="POST"
-					onsubmit="ArticleModify__submit(this); return false;">
-					<input type="hidden" name="id" value="${article.id}" />
-					<input type="hidden" name="redirectUri"
-						value="../article/detail?id=${article.id}" />
+				<form action="../member/doLogin" method="POST"
+					onsubmit="MemberLogin__submit(this); return false;">
+					
 					<div class="form-control">
 						<label class="label">
-							<span class="label-text">제목</span>
+							<span class="label-text">로그인아이디</span>
 						</label>
 						<div>
 							<input class="input input-bordered w-full" maxlength="100"
-								name="title" type="text" placeholder="제목을 입력해주세요." value="${article.title}"/>
+								name="loginId" type="text" placeholder="로그인아이디를 입력해주세요." />
 						</div>
 					</div>
 
 					<div class="form-control">
 						<label class="label">
-							<span class="label-text">내용</span>
+							<span class="label-text">로그인비밀번호</span>
 						</label>
-						<textarea maxlength="2000" class="textarea textarea-bordered h-60"
-							placeholder="내용" name="body">${article.body}</textarea>
+						<div>
+							<input class="input input-bordered w-full" maxlength="100"
+								name="loginPw" type="password" placeholder="로그인비밀번호를 입력해주세요." />
+						</div>
 					</div>
 
 					<div class="btns">
-						<button type="submit" class="btn btn-link">수정</button>
-						<button onclick="history.back();" type="button" class="btn btn-link">수정취소</button>
+						<button type="submit" class="btn btn-link">로그인</button>
 					</div>
 				</form>
 			</div>

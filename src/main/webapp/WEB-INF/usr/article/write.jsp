@@ -18,6 +18,10 @@
 				<script>
 					let ArticleWrite__submitDone = false;
 					function ArticleWrite__submit(form) {
+						if (ArticleWrite__submitDone) {
+							return;
+						}
+						
 						if (form.title.value.length == 0) {
 							alert('제목을 입력해주세요.');
 							form.title.focus();
@@ -54,7 +58,7 @@
 							<span class="label-text">내용</span>
 						</label>
 						<textarea maxlength="2000" class="textarea textarea-bordered h-60"
-							placeholder="내용" name="body"></textarea>
+							placeholder="내용을 입력해주세요." name="body"></textarea>
 					</div>
 
 					<div class="btns">
