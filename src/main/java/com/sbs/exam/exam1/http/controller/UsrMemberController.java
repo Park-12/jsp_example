@@ -1,9 +1,11 @@
 package com.sbs.exam.exam1.http.controller;
 
+import com.sbs.exam.exam1.dto.Member;
 import com.sbs.exam.exam1.dto.ResultData;
 import com.sbs.exam.exam1.http.Rq;
 import com.sbs.exam.exam1.http.container.Container;
 import com.sbs.exam.exam1.service.MemberService;
+import com.sbs.exam.exam1.util.Ut;
 
 public class UsrMemberController extends Controller {
 
@@ -45,6 +47,9 @@ public class UsrMemberController extends Controller {
 			rq.historyBack(loginRd.getMsg());
 		}
 		
+		Member member = (Member) loginRd.getBody().get("member");
+		
+		rq.setSessionAttr("loginedMemberJson", Ut.toJson(member, ""));
 		rq.replace(loginRd.getMsg(), redirectUri);
 	}
 
