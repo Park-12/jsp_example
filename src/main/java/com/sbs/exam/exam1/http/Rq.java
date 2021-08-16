@@ -2,18 +2,17 @@ package com.sbs.exam.exam1.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sbs.exam.exam1.dto.Article;
 import com.sbs.exam.exam1.dto.Member;
 import com.sbs.exam.exam1.util.Ut;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString
@@ -28,12 +27,27 @@ public class Rq {
 	private String controllerName;
 	@Getter
 	private String controllerTypeName;
+	
+	@Getter
+	@Setter
+	private boolean isLogined = false;
+	
+	@Getter
+	@Setter
+	private int loginedMemberId = 0;
+	
+	@Getter
+	@Setter
+	private Member loginedMember = null;
+	
+	public boolean isNotLogined() {
+		return isLogined == false;
+	}
 
 	public Rq(HttpServletRequest req, HttpServletResponse resp) {
 		try {
 			req.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -69,7 +83,6 @@ public class Rq {
 		try {
 			resp.getWriter().append(str);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -158,4 +171,9 @@ public class Rq {
 		
 		return (T) req.getSession().getAttribute(attrName);
 	}
+
+	public String getActionPath() {
+		return "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
+	}
+
 }
