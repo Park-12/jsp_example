@@ -1,6 +1,8 @@
-package com.sbs.exam.exam1.servlet;
+package com.sbs.exam.exam1.http.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.exam.exam1.http.Rq;
 import com.sbs.exam.exam1.http.container.Container;
 import com.sbs.exam.exam1.http.controller.Controller;
-import com.sbs.exam.exam1.http.controller.UsrArticleController;
+import com.sbs.exam.exam1.interceptor.Interceptor;
 import com.sbs.mysqlutil.MysqlUtil;
 
 @WebServlet("/usr/*")
@@ -24,6 +26,10 @@ public class DispatcherServlet extends HttpServlet {
 		}
 		
 		Controller controller = null;
+		
+		if (runInterceptors(rq) == false) {
+			return;
+		}
 		
 		switch (rq.getControllerTypeName()) {
 		case "usr":
@@ -44,6 +50,23 @@ public class DispatcherServlet extends HttpServlet {
 			MysqlUtil.closeConnection();
 		}
 		
+	}
+
+	private boolean runInterceptors(Rq rq) {
+		
+		if (Container.beforeActionInterceptor.runBeforeAction(rq) == false) {
+			return false;
+		}
+		
+		if (Container.needLoginInterceptor.runBeforeAction(rq) == false) {
+			return false;
+		}
+		
+		if (Container.needLogoutInterceptor.runBeforeAction(rq) == false) {
+			return false;
+		}
+		
+		return true;
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

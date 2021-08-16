@@ -17,39 +17,49 @@ public class Ut {
 		if (args.length % 2 != 0) {
 			throw new IllegalArgumentException("인자를 짝수개 입력해주세요.");
 		}
-		
+
 		int size = args.length / 2;
-		
+
 		Map<String, Object> map = new LinkedHashMap<>();
-		
+
 		for (int i = 0; i < size; i++) {
 			int keyIndex = i * 2;
 			int valueIndex = keyIndex + 1;
-			
+
 			String key;
 			Object value;
-			
+
 			try {
 				key = (String) args[keyIndex];
 			} catch (ClassCastException e) {
 				throw new IllegalArgumentException("키는 String으로 입력해야합니다." + e.getMessage());
 			}
-			
+
 			value = args[valueIndex];
-			
+
 			map.put(key, value);
 		}
-		
+
 		return map;
 	}
 
 	public static String toJson(Object obj, String defaultValue) {
 		ObjectMapper om = new ObjectMapper();
-		
+
 		try {
 			return om.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {
 			return defaultValue;
+		}
+	}
+
+	public static <T> T toObjFromJson(String jsonStr, Class<T> cls) {
+		ObjectMapper om = new ObjectMapper();
+
+		try {
+			return om.readValue(jsonStr, cls);
+		} catch (JsonProcessingException e) {
+			return null;
 		}
 	}
 
