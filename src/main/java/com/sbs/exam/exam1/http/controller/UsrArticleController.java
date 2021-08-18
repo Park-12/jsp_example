@@ -57,14 +57,14 @@ public class UsrArticleController extends Controller {
 			rq.historyBack("body를 입력해주세요.");
 			return;
 		}
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
 		if (article == null) {
 			rq.historyBack("존재하지 않는 게시물 입니다.");
 			return;
 		}
 
-		// 수정 하 수 있는지 확인 후 actorCanModifyRd에 넣기
+		// 수정 할 수 있는지 확인 후 actorCanModifyRd에 넣기
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMember(), article);
 
 		// 실패할 경우
@@ -86,9 +86,9 @@ public class UsrArticleController extends Controller {
 			return;
 		}
 
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
-		// 수정 하 수 있는지 확인 후 actorCanModifyRd에 넣기
+		// 수정 할 수 있는지 확인 후 actorCanModifyRd에 넣기
 		ResultData actorCanModifyRd = articleService.actorCanModify(rq.getLoginedMember(), article);
 
 		// 실패할 경우
@@ -116,7 +116,7 @@ public class UsrArticleController extends Controller {
 			return;
 		}
 
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
 		if (article == null) {
 			rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
@@ -144,7 +144,7 @@ public class UsrArticleController extends Controller {
 			return;
 		}
 
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(rq.getLoginedMember(), id);
 
 		if (article == null) {
 			rq.historyBack(Ut.f("%d번 게시물이 존재하지 않습니다.", id));
