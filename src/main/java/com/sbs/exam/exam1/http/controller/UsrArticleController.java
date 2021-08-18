@@ -157,9 +157,12 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void actionShowList(Rq rq) {
-		// 현재 로그인한 회원을 위해 출력용으로 가져오기
+		int itemsCountInAPage = 5;
+		int page = rq.getIntParam("page", 1);
+		
 		int totalItemsCount = articleService.getArticlesCount();
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember());
+		// 현재 로그인한 회원을 위해 출력용으로 가져오기
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember(), itemsCountInAPage, page);
 
 		rq.setAttr("totalItemsCount", totalItemsCount);
 		rq.setAttr("articles", articles);
