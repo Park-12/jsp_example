@@ -68,9 +68,9 @@ nickname = '강바람',
 email = 'sohyunp96@gmail.com',
 cellphoneNo = '01012341234';
 
-/*
 SELECT * FROM `member`
 
+/*
 INSERT INTO article
 (regDate, updateDate, boardId, memberId, title, `body`)
 SELECT

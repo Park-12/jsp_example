@@ -18,13 +18,13 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getForPrintArticles(Member actor, int itemsCountInAPage, int page) {
+	public List<Article> getForPrintArticles(Member actor, String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage, int page) {
 		int limitFrom = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
 		
 		// getForPrintArticles DB쿼리
 		// extra__writerName까지 얻을 수 있음
-		List<Article> articles = articleRepository.getForPrintArticles(limitFrom, limitTake);
+		List<Article> articles = articleRepository.getForPrintArticles(searchKeywordTypeCode, searchKeyword, limitFrom, limitTake);
 		
 		for (Article article : articles) {
 			// 나머지 extra 2개 채우기
@@ -91,8 +91,8 @@ public class ArticleService {
 		return ResultData.from("S-1", "삭제가 가능합니다.");
 	}
 
-	public int getArticlesCount() {
-		return articleRepository.getArticlesCount();
+	public int getArticlesCount(String searchKeywordTypeCode, String searchKeyword) {
+		return articleRepository.getArticlesCount(searchKeywordTypeCode, searchKeyword);
 	}
 
 }

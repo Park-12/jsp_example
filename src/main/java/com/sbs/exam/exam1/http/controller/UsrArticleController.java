@@ -157,12 +157,15 @@ public class UsrArticleController extends Controller {
 	}
 
 	private void actionShowList(Rq rq) {
+		String searchKeywordTypeCode = rq.getParam("searchKeywordTypeCode", "title");
+		String searchKeyword = rq.getParam("searchKeyword", "");
+		
 		int itemsCountInAPage = 5;
 		int page = rq.getIntParam("page", 1);
 		
-		int totalItemsCount = articleService.getArticlesCount();
+		int totalItemsCount = articleService.getArticlesCount(searchKeywordTypeCode, searchKeyword);
 		// 현재 로그인한 회원을 위해 출력용으로 가져오기
-		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember(), itemsCountInAPage, page);
+		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember(), searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
 
 		rq.setAttr("totalItemsCount", totalItemsCount);
 		rq.setAttr("articles", articles);
