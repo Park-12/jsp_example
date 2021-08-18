@@ -18,8 +18,14 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getForPrintArticles() {
-		return articleRepository.getForPrintArticles();
+	public List<Article> getForPrintArticles(Member actor) {
+		List<Article> articles = articleRepository.getForPrintArticles();
+		
+		for (Article article : articles) {
+			udpateForPrintData(actor, article);
+		}
+		
+		return articles;
 	}
 
 	public Article getForPrintArticleById(Member actor, int id) {
@@ -54,8 +60,8 @@ public class ArticleService {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 수정되었습니다.", id), "id", id);
 	}
 
-	public ResultData actorCanModify(Member member, Article article) {
-		int memberId = member.getId();
+	public ResultData actorCanModify(Member actor, Article article) {
+		int memberId = actor.getId();
 		int writerMemberId = article.getMemberId();
 		
 		// boolean을 리턴하면 true/false 로만 확인됨 이유 알 수 없음
