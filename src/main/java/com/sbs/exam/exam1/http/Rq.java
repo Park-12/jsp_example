@@ -175,5 +175,27 @@ public class Rq {
 	public String getActionPath() {
 		return "/" + controllerTypeName + "/" + controllerName + "/" + actionMethodName;
 	}
+	
+	public String getAttr(String attrName, String defaultValue) {
+		String attrValue = (String)req.getAttribute(attrName);
+
+		if (attrValue == null) {
+			return defaultValue;
+		}
+
+		return attrValue;
+	}
+	
+	public int getIntAttr(String attrName, int defaultValue) {
+		// Integer -> null 허용
+		Integer attrValue = (Integer)req.getAttribute(attrName);
+
+		if (attrValue == null) {
+			return defaultValue;
+		}
+
+		return attrValue;
+
+	}
 
 }
