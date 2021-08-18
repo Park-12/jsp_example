@@ -19,9 +19,12 @@ public class ArticleService {
 	}
 
 	public List<Article> getForPrintArticles(Member actor) {
+		// getForPrintArticles DB쿼리
+		// extra__writerName까지 얻을 수 있음
 		List<Article> articles = articleRepository.getForPrintArticles();
 		
 		for (Article article : articles) {
+			// 나머지 extra 2개 채우기
 			udpateForPrintData(actor, article);
 		}
 		

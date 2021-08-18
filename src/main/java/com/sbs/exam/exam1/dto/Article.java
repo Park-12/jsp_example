@@ -15,7 +15,9 @@ public class Article {
 	private String title;
 	private String body;
 	
+	// 추가로 만들어진 거
 	private String extra__writerName;
+	// 쿼리로 한번에 가져오기 어려움 계산해야함
 	private boolean extra__actorCanModify;
 	private boolean extra__actorCanDelete;
 
