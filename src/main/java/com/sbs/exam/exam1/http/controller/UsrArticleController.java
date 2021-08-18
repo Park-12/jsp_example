@@ -167,6 +167,9 @@ public class UsrArticleController extends Controller {
 		// 현재 로그인한 회원을 위해 출력용으로 가져오기
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember(), searchKeywordTypeCode, searchKeyword, itemsCountInAPage, page);
 
+		int totalPage = 20;
+		
+		rq.setAttr("totalPage", totalPage);
 		rq.setAttr("totalItemsCount", totalItemsCount);
 		rq.setAttr("articles", articles);
 
