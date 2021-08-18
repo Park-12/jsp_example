@@ -158,8 +158,10 @@ public class UsrArticleController extends Controller {
 
 	private void actionShowList(Rq rq) {
 		// 현재 로그인한 회원을 위해 출력용으로 가져오기
+		int totalItemsCount = articleService.getArticlesCount();
 		List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMember());
 
+		rq.setAttr("totalItemsCount", totalItemsCount);
 		rq.setAttr("articles", articles);
 
 		rq.jsp("usr/article/list");
