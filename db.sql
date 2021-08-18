@@ -68,6 +68,7 @@ nickname = '강바람',
 email = 'sohyunp96@gmail.com',
 cellphoneNo = '01012341234';
 
+
 SELECT * FROM `member`
 
 /*
@@ -78,8 +79,8 @@ NOW(),
 NOW(),
 CAST(RAND() * 2 AS SIGNED) + 1,
 CAST(RAND() * 2 AS SIGNED) + 1,
-CONCAT('제목--', UUID()),
-CONCAT('내용--', UUID())
+CONCAT('제목--', RAND()),
+CONCAT('내용--', RAND())
 FROM article;
 
 SELECT COUNT(*) FROM article WHERE id <= 120;
