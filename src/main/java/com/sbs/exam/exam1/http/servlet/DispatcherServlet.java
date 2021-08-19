@@ -26,7 +26,6 @@ public class DispatcherServlet extends HttpServlet {
 			return;
 		}
 		
-		
 		if (runInterceptors(rq) == false) {
 			return;
 		}
