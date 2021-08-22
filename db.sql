@@ -73,24 +73,16 @@ SELECT * FROM `member`
 
 /*
 INSERT INTO article
-(regDate, updateDate, boardId, memberId, title, `body`)
+(regDate, updateDate, boardId, memberId, title, `boday`)
 SELECT
 NOW(),
 NOW(),
-CAST(RAND() * 2 AS SIGNED) + 1,
-CAST(RAND() * 2 AS SIGNED) + 1,
+CAST(RAND() * (2 - 1) AS SIGNED) + 1,
+CAST(RAND() * (2 - 1) AS SIGNED) + 1,
 CONCAT('제목--', RAND()),
 CONCAT('내용--', RAND())
 FROM article;
 
-SELECT COUNT(*) FROM article WHERE id <= 120;
-
-SELECT id
-FROM article
-ORDER BY id ASC
-LIMIT 100;
-
-DELETE FROM article WHERE id > 157;
-
 SELECT * FROM article;
+
 */
