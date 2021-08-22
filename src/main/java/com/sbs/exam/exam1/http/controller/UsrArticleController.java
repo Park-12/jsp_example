@@ -162,6 +162,7 @@ public class UsrArticleController extends Controller {
 		
 		int itemsCountInAPage = 10;
 		int page = rq.getIntParam("page", 1);
+		int boardId = rq.getIntParam("boardId", 0);
 		
 		int totalItemsCount = articleService.getArticlesCount(searchKeywordTypeCode, searchKeyword);
 		// 현재 로그인한 회원을 위해 출력용으로 가져오기
@@ -174,6 +175,7 @@ public class UsrArticleController extends Controller {
 		int totalPage = (int)Math.ceil((double)totalItemsCount / itemsCountInAPage);
 		
 		rq.setAttr("page", page);
+		rq.setAttr("boardId", boardId);
 		rq.setAttr("totalPage", totalPage);
 		rq.setAttr("totalItemsCount", totalItemsCount);
 		rq.setAttr("articles", articles);
