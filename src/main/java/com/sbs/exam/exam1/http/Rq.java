@@ -202,7 +202,7 @@ public class Rq {
 	}
 	
 	// Map형태로 정리
-	public Map<String, Object> getParamMap() {
+	private Map<String, Object> getParamMap() {
 		// Map 생성
 		Map<String, Object> params = new HashMap<>();
 
@@ -221,6 +221,34 @@ public class Rq {
 	
 	public String getParamMapJsonStr() {
 		return Ut.toJson(getParamMap(), "");
+	}
+	
+	private Map<String, Object> rqBaseTypeAttrMapStr() {
+		Map<String, Object> attrs = new HashMap<>();
+
+		Enumeration<String> attrNames = req.getAttributeNames();
+
+		while (attrNames.hasMoreElements()) {
+			String attrName = attrNames.nextElement();
+			Object attrValue = req.getAttribute(attrName);
+			
+			if (attrName.equals("rq")) {
+				continue;
+			}
+			
+			// articles 빼고
+			if (Ut.isBaseType(attrValue) == false) {
+				continue;
+			}
+
+			attrs.put(attrName, attrValue);
+		}
+
+		return attrs;
+	}
+	
+	public String getBaseTypeAttrMapJsonStr() {
+		return Ut.toJson(rqBaseTypeAttrMapStr(), "");
 	}
 
 }

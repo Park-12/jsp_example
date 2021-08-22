@@ -174,6 +174,7 @@ public class UsrArticleController extends Controller {
 		// totalPage = 2 
 		int totalPage = (int)Math.ceil((double)totalItemsCount / itemsCountInAPage);
 		
+		rq.setAttr("searchKeywordTypeCode", searchKeywordTypeCode);
 		rq.setAttr("page", page);
 		rq.setAttr("boardId", boardId);
 		rq.setAttr("totalPage", totalPage);
