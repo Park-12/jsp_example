@@ -2,6 +2,9 @@ package com.sbs.exam.exam1.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -196,6 +199,28 @@ public class Rq {
 
 		return attrValue;
 
+	}
+	
+	// Map형태로 정리
+	public Map<String, Object> getParamMap() {
+		// Map 생성
+		Map<String, Object> params = new HashMap<>();
+
+		// req에서 이름만 뽑아오기
+		Enumeration<String> parameterNames = req.getParameterNames();
+
+		while (parameterNames.hasMoreElements()) {
+			String paramName = parameterNames.nextElement();
+			Object paramValue = req.getParameter(paramName);
+
+			params.put(paramName, paramValue);
+		}
+
+		return params;
+	}
+	
+	public String getParamMapJsonStr() {
+		return Ut.toJson(getParamMap(), "");
 	}
 
 }
