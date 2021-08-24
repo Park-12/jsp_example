@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="게시물 리스트" />
@@ -16,15 +17,25 @@
 			</div>
 
 			<div class="px-4 py-4">
-				<div class="badge badge-primary">
-					<c:if test="${param.searchKeyword == null}">
-						전체게시물 개수
-					</c:if>
-					<c:if test="${param.searchKeyword != null}">
-						검색어 `${param.searchKeyword}`, 게시물 개수
-					</c:if>
-				</div>
-				${totalItemsCount}
+				<c:if test="${param.searchKeyword != null && param.searchKeyword != ''}">
+					<div class="badge badge-primary">
+						검색어 타입
+					</div>
+					<span>${param.searchKeywordTypeCode}</span>
+
+					<br />
+
+					<div class="badge badge-primary">
+						검색어
+					</div>
+					<span>${param.searchKeyword}</span>
+
+					<br />
+				</c:if>
+
+				<div class="badge badge-primary">전체게시물 개수</div>
+				<span> ${totalItemsCount} </span>
+
 			</div>
 
 			<hr />
@@ -38,13 +49,16 @@
 							<span class="label-text">검색타입</span>
 						</label>
 						<div>
-							<select name="searchKeywordTypeCode" class="select select-bordered w-full max-w-md">
+							<select name="searchKeywordTypeCode"
+								class="select select-bordered w-full max-w-md">
 								<option value="title,body">제목,내용</option>
 								<option value="title">제목</option>
 								<option value="body">내용</option>
 							</select>
 							<script>
-									$('.section-article-write select[name="searchKeywordTypeCode"]').val(rqBaseTypeAttrs.searchKeywordTypeCode);									
+								if ('${param.searchKeywordTypeCode}.trim().length > 0') {
+									$('.section-article-write select[name="searchKeywordTypeCode"]').val(rqBaseTypeAttrs.searchKeywordTypeCode);
+								}
 							</script>
 						</div>
 					</div>
@@ -54,7 +68,9 @@
 							<span class="label-text">검색어</span>
 						</label>
 						<div>
-							<input class="input input-bordered w-full max-w-md" maxlength="100" name="searchKeyword" type="text" placeholder="검색어를 입력해주세요." value="${param.searchKeyword}" />
+							<input class="input input-bordered w-full max-w-md"
+								maxlength="100" name="searchKeyword" type="text"
+								placeholder="검색어를 입력해주세요." value="${param.searchKeyword}" />
 						</div>
 					</div>
 
@@ -73,7 +89,8 @@
 					<div class="py-4">
 						<div class="grid gap-3" style="grid-template-columns: 100px 1fr;">
 							<a href="${detailUri}">
-								<img class="rounded-full w-full" src="https://i.pravatar.cc/200?img=37" alt="">
+								<img class="rounded-full w-full"
+									src="https://i.pravatar.cc/200?img=37" alt="">
 							</a>
 							<a href="${detailUri}" class="hover:underline cursor-pointer">
 								<span class="badge badge-outline">제목</span>
@@ -100,11 +117,13 @@
 							</a>
 						</div>
 
-						<a href="${detailUri}" class="block mt-3 hover:underline cursor-pointer col-span-1 sm:col-span-2 xl:col-span-3">
+						<a href="${detailUri}"
+							class="block mt-3 hover:underline cursor-pointer col-span-1 sm:col-span-2 xl:col-span-3">
 							<span class="badge badge-outline">본문</span>
 
 							<div class="mt-2">
-								<img class="rounded" src="https://picsum.photos/id/237/300/300" alt="" />
+								<img class="rounded" src="https://picsum.photos/id/237/300/300"
+									alt="" />
 							</div>
 
 							<div class="line-clamp-3">${article.bodySummaryForPrint}</div>
@@ -121,7 +140,8 @@
 							</a>
 						</c:if>
 						<c:if test="${article.extra__actorCanDelete}">
-							<a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" href="../article/doDelete?id=${article.id}" class="btn btn-link">
+							<a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;"
+								href="../article/doDelete?id=${article.id}" class="btn btn-link">
 								<span>
 									<i class="fas fa-trash-alt"></i>
 								</span>
@@ -135,10 +155,14 @@
 
 				<div class="page-menu">
 					<c:set var="baseUri" value="?boardId=${boardId}" />
+					<c:set var="baseUri" value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+					<c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}" />
 
 					<c:set var="pageMenuArmSize" value="7" />
-					<c:set var="startPage" value="${page - pageMenuArmSize >= 1 ? page - pageMenuArmSize : 1}" />
-					<c:set var="endPage" value="${page + pageMenuArmSize <= totalPage ? page + pageMenuArmSize : totalPage}" />
+					<c:set var="startPage"
+						value="${page - pageMenuArmSize >= 1 ? page - pageMenuArmSize : 1}" />
+					<c:set var="endPage"
+						value="${page + pageMenuArmSize <= totalPage ? page + pageMenuArmSize : totalPage}" />
 
 					<div class="btn-group">
 						<c:if test="${startPage > 1}">
