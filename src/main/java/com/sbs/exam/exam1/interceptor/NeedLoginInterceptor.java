@@ -23,8 +23,9 @@ public class NeedLoginInterceptor extends Interceptor {
 		}
 		
 		if (rq.isNotLogined()) {
-			rq.historyBack("로그인 후 이용해주세요.");
+			rq.replace("로그인 후 이용해주세요.", "../member/login?afterLoginUri=" + rq.getEncodedAfterLoginUri());
 			return false;
+			
 		}
 
 		return true;
