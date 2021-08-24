@@ -106,7 +106,7 @@ public class Rq {
 	public String getParam(String paramName, String defaultValue) {
 		String paramValue = req.getParameter(paramName);
 
-		if (paramValue == null) {
+		if (paramValue == null || paramValue.trim().length() == 0) {
 			return defaultValue;
 		}
 
@@ -265,5 +265,21 @@ public class Rq {
 	// url 안에 url이 있으면 인코딩 시켜준다.
 	public String getEncodedCurrentUri() {
 		return Ut.getUriEncoded(getCurrentUri());
+	}
+	
+	public String getEncodedAfterLoginUri() {
+		return Ut.getUriEncoded(getAfterLoginUri());
+	}
+
+	public String getAfterLoginUri() {
+		String afterLoginUri = getParam("afterLoginUri", "");
+		
+		// afterLoginUri 있으면 afterLoginUri 리턴
+		if (afterLoginUri.length() > 0) {
+			return afterLoginUri;
+		}
+		
+		// afterLoginUri 없으면 최신 URI 리턴
+		return getCurrentUri();
 	}
 }
