@@ -250,5 +250,20 @@ public class Rq {
 	public String getBaseTypeAttrMapJsonStr() {
 		return Ut.toJson(rqBaseTypeAttrMapStr(), "");
 	}
+	
+	public String getCurrentUri() {
+		String uri = req.getRequestURI();
+		String queryStr = req.getQueryString();
+		
+		if (queryStr != null && queryStr.length() > 0) {
+			uri += "?" + queryStr;
+		}
+		return uri;
+	}
 
+	// ../member/login?afterLoginUri=%2Fjsp_example%2Fusr%2Farticle%2Fdetail%3Fid%3D157
+	// url 안에 url이 있으면 인코딩 시켜준다.
+	public String getEncodedCurrentUri() {
+		return Ut.getUriEncoded(getCurrentUri());
+	}
 }
