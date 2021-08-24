@@ -1,6 +1,7 @@
 package com.sbs.exam.exam1.http.container;
 
 import com.sbs.exam.exam1.http.controller.UsrArticleController;
+import com.sbs.exam.exam1.http.controller.UsrHomeController;
 import com.sbs.exam.exam1.http.controller.UsrMemberController;
 import com.sbs.exam.exam1.interceptor.BeforeActionInterceptor;
 import com.sbs.exam.exam1.interceptor.NeedLoginInterceptor;
@@ -23,6 +24,8 @@ public class Container {
 	public static MemberService memberService;
 	public static UsrMemberController usrMemberController;
 	
+	public static UsrHomeController usrHomeController;
+	
 	public static void init() {
 		articleRepository = new ArticleRepository();
 		memberRepository = new MemberRepository();
@@ -36,5 +39,7 @@ public class Container {
 		
 		usrArticleController = new UsrArticleController();
 		usrMemberController = new UsrMemberController();
+		
+		usrHomeController = new UsrHomeController();
 	}
 }
