@@ -17,33 +17,29 @@
 			</div>
 
 			<div class="px-4 py-4">
-				<c:if test="${param.searchKeyword != null && param.searchKeyword != ''}">
-					<div class="badge badge-primary">
-						검색어 타입
-					</div>
+				<c:if
+					test="${param.searchKeyword != null && param.searchKeyword != ''}">
+					<div class="badge badge-primary">검색어 타입</div>
 					<span>${param.searchKeywordTypeCode}</span>
 
 					<br />
 
-					<div class="badge badge-primary">
-						검색어
-					</div>
+					<div class="badge badge-primary">검색어</div>
 					<span>${param.searchKeyword}</span>
 
 					<br />
 				</c:if>
 
 				<div class="badge badge-primary">전체게시물 개수</div>
-				<span> ${totalItemsCount} </span>
-
+				<span>${totalItemsCount}</span>
 			</div>
 
 			<hr />
-			
-			<div class="btns px-4 py-4" >
+
+			<div class="btns px-4 py-4">
 				<a class="btn btn-link" href="../article/write?boardId=${boardId}">글쓰기</a>
 			</div>
-			
+
 			<hr />
 
 			<div class="px-4 py-4">
@@ -62,9 +58,10 @@
 								<option value="body">내용</option>
 							</select>
 							<script>
-								if ('${param.searchKeywordTypeCode}.trim().length > 0') {
-									$('.section-article-write select[name="searchKeywordTypeCode"]').val(rqBaseTypeAttrs.searchKeywordTypeCode);
-								}
+								$(
+										'.section-article-write select[name="searchKeywordTypeCode"]')
+										.val(
+												rqBaseTypeAttrs.searchKeywordTypeCode);
 							</script>
 						</div>
 					</div>
@@ -159,10 +156,12 @@
 					<hr />
 				</c:forEach>
 
-				<div class="page-menu">
+				<div class="page-menu hidden md:flex">
 					<c:set var="baseUri" value="?boardId=${boardId}" />
-					<c:set var="baseUri" value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
-					<c:set var="baseUri" value="${baseUri}&searchKeyword=${param.searchKeyword}" />
+					<c:set var="baseUri"
+						value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+					<c:set var="baseUri"
+						value="${baseUri}&searchKeyword=${param.searchKeyword}" />
 
 					<c:set var="pageMenuArmSize" value="7" />
 					<c:set var="startPage"
@@ -188,6 +187,41 @@
 								<button class="btn btn-sm btn-disabled">...</button>
 							</c:if>
 							<a class="btn btn-sm" href="${baseUri}&page=${totalPage}">${totalPage}</a>
+						</c:if>
+					</div>
+				</div>
+
+				<div class="page-menu flex md:hidden">
+					<c:set var="baseUri" value="?boardId=${boardId}" />
+					<c:set var="baseUri"
+						value="${baseUri}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
+					<c:set var="baseUri"
+						value="${baseUri}&searchKeyword=${param.searchKeyword}" />
+
+					<c:set var="pageMenuArmSize" value="2" />
+					<c:set var="startPage"
+						value="${page - pageMenuArmSize >= 1 ? page - pageMenuArmSize : 1}" />
+					<c:set var="endPage"
+						value="${page + pageMenuArmSize <= totalPage ? page + pageMenuArmSize : totalPage}" />
+
+					<div class="btn-group">
+						<c:if test="${startPage > 1}">
+							<a class="btn btn-xs" href="${baseUri}&page=1">1</a>
+							<c:if test="${startPage > 2}">
+								<button class="btn btn-disabled btn-xs">...</button>
+							</c:if>
+						</c:if>
+
+						<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+							<c:set var="aClassStr" value="${i == page ? 'btn-active' : ''}" />
+							<a class="${aClassStr} btn btn-xs" href="${baseUri}&page=${i}">${i}</a>
+						</c:forEach>
+
+						<c:if test="${endPage < totalPage}">
+							<c:if test="${endPage < totalPage - 1}">
+								<button class="btn btn-disabled btn-xs">...</button>
+							</c:if>
+							<a class="btn btn-xs" href="${baseUri}&page=${totalPage}">${totalPage}</a>
 						</c:if>
 					</div>
 				</div>
