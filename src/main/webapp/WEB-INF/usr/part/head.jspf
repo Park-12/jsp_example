@@ -6,13 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${pageTitle} | JSP BOARD</title>
+<title>${pageTitle}|JSPBOARD</title>
 
 <!-- 모바일에서 디자인이 축소되지 않게 하기 위한 코드 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- 제이쿼리 불러오기 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet"
@@ -33,22 +34,24 @@
 	href="${pageContext.request.contextPath}/resource/common.css" />
 </head>
 
-<script>
+<!-- 코드 정렬시 깨짐 방지 -->
+<%="<script>"%>
 const rqBaseTypeAttrs = ${rq.baseTypeAttrMapJsonStr};
+<%="</script>"%>
+<%="<script>"%>
 const rqParams = ${rq.paramMapJsonStr};
-</script>
+<%="</script>"%>
 
 <body>
-
-	<header class="top-bar h-20 font-bold">
+	<div class="h-10"></div>
+	<header class="top-bar fixed z-50 inset-0 bg-white h-10 font-bold border-b">
 		<div class="h-full container mx-auto flex">
 			<a href="../../"
 				class="top-bar__logo flex items-center px-4 hover:underline hover:text-red-500">
 				<span>
 					<i class="far fa-lemon"></i>
 				</span>
-				&nbsp;
-				<span> 레몬 커뮤니티 </span>
+				<span class="hidden md:block">&nbsp;레몬 커뮤니티 </span>
 			</a>
 
 			<div class="flex-grow"></div>
@@ -56,13 +59,12 @@ const rqParams = ${rq.paramMapJsonStr};
 			<nav class="top-bar__menu-box-1">
 				<ul class="flex h-full">
 					<li>
-						<a href="#"
+						<a href="../../"
 							class="h-full flex items-center px-4 hover:underline hover:text-red-500">
 							<span>
 								<i class="fas fa-home"></i>
 							</span>
-							&nbsp;
-							<span>HOME</span>
+							<span class="hidden sm:block">&nbsp;HOME</span>
 						</a>
 					</li>
 					<li>
@@ -71,8 +73,7 @@ const rqParams = ${rq.paramMapJsonStr};
 							<span>
 								<i class="fas fa-flag"></i>
 							</span>
-							&nbsp;
-							<span>NOTICE LIST</span>
+							<span class="hidden sm:block">&nbsp;NOTICE LIST</span>
 						</a>
 					</li>
 					<li>
@@ -81,28 +82,27 @@ const rqParams = ${rq.paramMapJsonStr};
 							<span>
 								<i class="fab fa-free-code-camp"></i>
 							</span>
-							&nbsp;
-							<span>FREE LIST</span>
+							<span class="hidden sm:block">&nbsp;FREE LIST</span>
 						</a>
 					</li>
 					<c:if test="${rq.notLogined}">
 						<li>
-							<a href="../member/login?afterLoginUri=${rq.encodedAfterLoginUri}"
+							<a
+								href="../member/login?afterLoginUri=${rq.encodedAfterLoginUri}"
 								class="h-full flex items-center px-4 hover:underline hover:text-red-500">
 								<span>
 									<i class="fas fa-sign-in-alt"></i>
 								</span>
-								&nbsp;
-								<span>LOGIN</span>
+								<span class="hidden sm:block">&nbsp;LOGIN</span>
 							</a>
 						</li>
 						<li>
-							<a href="#"
+							<a href="../member/join"
 								class="h-full flex items-center px-4 hover:underline hover:text-red-500">
 								<span>
 									<i class="fas fa-user-plus"></i>
 								</span>
-								<span>JOIN</span>
+								<span class="hidden sm:block">&nbsp;JOIN</span>
 							</a>
 						</li>
 					</c:if>
