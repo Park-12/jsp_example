@@ -43,8 +43,10 @@ const rqParams = ${rq.paramMapJsonStr};
 <%="</script>"%>
 
 <body>
-	<div class="h-10"></div>
-	<header class="top-bar fixed z-50 inset-0 bg-white h-10 font-bold border-b">
+	<div class="site-wrap min-h-screen flex flex-col">
+	<div class="h-10 flex-shrink-0 mb-4"></div>
+	<header
+		class="top-bar fixed z-50 inset-0 bg-white h-10 font-bold border-b">
 		<div class="h-full container mx-auto flex">
 			<a href="../../"
 				class="top-bar__logo flex items-center px-4 hover:underline hover:text-red-500">
@@ -131,3 +133,4 @@ const rqParams = ${rq.paramMapJsonStr};
 			</nav>
 		</div>
 	</header>
+	<main class="flex-grow flex flex-col">
